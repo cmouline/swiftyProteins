@@ -8,9 +8,11 @@
 
 import UIKit
 
-class ProteinListViewController: UITableViewController {
+class ProteinListViewController: UITableViewController, UISearchResultsUpdating {
 
     var proteinList: [String] = []
+    var filteredProteinList: [String] = []
+    let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +25,10 @@ class ProteinListViewController: UITableViewController {
         
         getProteinList()
         
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
 
     }
 
@@ -44,24 +50,53 @@ class ProteinListViewController: UITableViewController {
         
     }
 
+    // MARK: - Search Bar and Filter Functions
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchText: searchController.searchBar.text!)
+    }
+
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        print("searchText :\(searchText)")
+        filteredProteinList = proteinList.filter { protein in
+            var hasSubstring = false
+            if protein.lowercased().range(of: searchText.lowercased()) != nil {
+                hasSubstring = true
+            }
+            return hasSubstring
+        }
+
+        tableView.reloadData()
+    }
 
     // MARK: - Table view data source
 
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        // #warning Incomplete implementation, return the number of sections
-//        return 0
-//    }
-
+    /*
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 0
+    }
+    */
+ 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        if searchController.isActive && searchController.searchBar.text != "" {
+            return filteredProteinList.count
+        }
         return proteinList.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "proteinCell", for: indexPath)
-        cell.textLabel?.text = proteinList[indexPath.row]
+        if searchController.isActive && searchController.searchBar.text != "" {
+            cell.textLabel?.text = filteredProteinList[indexPath.row]
+        } else {
+            cell.textLabel?.text = proteinList[indexPath.row]
+        }
         return cell
+
     }
 
     /*
@@ -108,5 +143,6 @@ class ProteinListViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
 }
+
