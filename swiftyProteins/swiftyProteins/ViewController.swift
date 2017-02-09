@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import SceneKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var sceneView: SCNView!
+    
+    
     func parseHTML() {
         
         let myURLString = "https://files.rcsb.org/ligands/view/V11_ideal.pdb"
@@ -42,6 +46,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         parseHTML()
+        initScene()
         
     }
 
@@ -49,7 +54,25 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    func initScene() {
+        sceneView.scene = Scene()
+//        sceneView.size = view.bounds.size;
+        sceneView.autoenablesDefaultLighting = true
+        sceneView.allowsCameraControl = true
+        
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        sceneView.stop(nil)
+        sceneView.play(nil)
+    }
 
+    override var shouldAutorotate: Bool {
+        return true
+    }
 
 }
 
