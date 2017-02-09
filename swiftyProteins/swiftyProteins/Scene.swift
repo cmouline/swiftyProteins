@@ -18,21 +18,10 @@ class Scene: SCNScene {
         self.atoms = atoms
         self.conects = conects
         super.init()
-        
-//        setupLights()
         setupCamera()
-        
-//        let sphereGeometry = SCNSphere(radius: 1.0)
-//        let sphereNode = SCNNode(geometry: sphereGeometry)
-//        self.rootNode.addChildNode(sphereNode)
-//        
-//        let secondSphereGeometry = SCNSphere(radius: 0.5)
-//        let secondSphereNode = SCNNode(geometry: secondSphereGeometry)
-//        secondSphereNode.position = SCNVector3(x: 3.0, y: 0.0, z: 0.0)
-//        self.rootNode.addChildNode(secondSphereNode)
-//        geometryLabel.text = "Atoms\n"
-        let geometryNode = Scene.allAtoms()
-        self.rootNode.addChildNode(geometryNode)
+//        setupLights()
+        self.rootNode.addChildNode(allAtoms())
+        self.rootNode.addChildNode(allConects())
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -61,56 +50,100 @@ class Scene: SCNScene {
         self.rootNode.addChildNode(omniLightNode)
     }
     
-    class func carbonAtom() -> SCNGeometry {
+    func atomGeometry(type : String) -> SCNGeometry {
+        var radius : CGFloat
+        var diffuseColor : UIColor
         
-        let carbonAtom = SCNSphere(radius: 1.70)
-        carbonAtom.firstMaterial!.diffuse.contents = UIColor.darkGray
-        carbonAtom.firstMaterial!.specular.contents = UIColor.white
-        return carbonAtom
+        switch type {
+        case "C" :
+            radius = 1.70 / 10
+            diffuseColor = UIColor.darkGray
+        case "H" :
+            radius = 1.20 / 10
+            diffuseColor = UIColor.lightGray
+        case "O" :
+            radius = 1.52 / 10
+            diffuseColor = UIColor.red
+        case "F" :
+            radius = 1.47 / 10
+            diffuseColor = UIColor.yellow
+        default :
+            radius = 1.00 / 10
+            diffuseColor = UIColor.white
+        }
+        
+        let atom = SCNSphere(radius: radius)
+        atom.firstMaterial!.diffuse.contents = diffuseColor
+        atom.firstMaterial!.specular.contents = UIColor.white
+        return atom
     }
     
-    class func hydrogenAtom() -> SCNGeometry {
-        let hydrogenAtom = SCNSphere(radius: 1.20)
-        hydrogenAtom.firstMaterial!.diffuse.contents = UIColor.lightGray
-        hydrogenAtom.firstMaterial!.specular.contents = UIColor.white
-        return hydrogenAtom
-    }
-    
-    class func oxygenAtom() -> SCNGeometry {
-        let oxygenAtom = SCNSphere(radius: 1.52)
-        oxygenAtom.firstMaterial!.diffuse.contents = UIColor.red
-        oxygenAtom.firstMaterial!.specular.contents = UIColor.white
-        return oxygenAtom
-    }
-    
-    class func fluorineAtom() -> SCNGeometry {
-        let fluorineAtom = SCNSphere(radius: 1.47)
-        fluorineAtom.firstMaterial!.diffuse.contents = UIColor.yellow
-        fluorineAtom.firstMaterial!.specular.contents = UIColor.white
-        return fluorineAtom
-    }
-    
-    class func allAtoms() -> SCNNode {
+    func allAtoms() -> SCNNode {
         let atomsNode = SCNNode()
         
-        let carbonNode = SCNNode(geometry: carbonAtom())
-        carbonNode.position = SCNVector3Make(-6, 0, 0)
-        atomsNode.addChildNode(carbonNode)
-        
-        let hydrogenNode = SCNNode(geometry: hydrogenAtom())
-        hydrogenNode.position = SCNVector3Make(-2, 0, 0)
-        atomsNode.addChildNode(hydrogenNode)
-        
-        let oxygenNode = SCNNode(geometry: oxygenAtom())
-        oxygenNode.position = SCNVector3Make(+2, 0, 0)
-        atomsNode.addChildNode(oxygenNode)
-        
-        let fluorineNode = SCNNode(geometry: fluorineAtom())
-        fluorineNode.position = SCNVector3Make(+6, 0, 0)
-        atomsNode.addChildNode(fluorineNode)
+        for atom in self.atoms {
+            let node = SCNNode(geometry: atomGeometry(type: atom.type))
+            node.position = SCNVector3Make(atom.x, atom.y, atom.z)
+            atomsNode.addChildNode(node)
+        }
         
         return atomsNode
     }
+    
+    func conectGeometry(p1: (x: Float, y: Float, z: Float, type: String), p2: (x: Float, y: Float, z: Float, type: String)) -> SCNGeometry {
+
+        let v1 : SCNVector3 = SCNVector3Make(p1.x, p1.y, p1.z)
+        let v2 : SCNVector3 = SCNVector3Make(p2.x, p2.y, p2.z)
+        let radius : CGFloat = 0.1 //
+        let height = v1.distance(receiver: v2)
+        print(height)//
+        let conect = SCNCylinder(radius: radius, height: CGFloat(height))
+        conect.radialSegmentCount = 10 //
+        conect.firstMaterial?.diffuse.contents = UIColor.black //
+        return conect
+    }
+    
+    func allConects() -> SCNNode {
+        let conectsNode = SCNNode()
+        
+        for conect in self.conects {
+
+            let v0 : SCNVector3 = SCNVector3Make(conect[0].x, conect[0].y, conect[0].z)
+            let v1 : SCNVector3 = SCNVector3Make(conect[1].x, conect[1].y, conect[1].z)
+            let radius : CGFloat = 0.01 //
+            let height = v0.distance(receiver: v1)
+            let geometry = SCNCylinder(radius: radius, height: CGFloat(height))
+            geometry.radialSegmentCount = 10 //
+            geometry.firstMaterial?.diffuse.contents = UIColor.black //
+            
+            let cylinderline = SCNNode()
+            cylinderline.position = v0
+            let node1 = SCNNode()
+            node1.position = v1
+            conectsNode.addChildNode(node1)
+            
+            let zAlign = SCNNode()
+            zAlign.eulerAngles.x = Float(M_PI_2)
+            
+            let node = SCNNode(geometry: geometry)
+            node.position.y = -height / 2
+            zAlign.addChildNode(node)
+            cylinderline.addChildNode(zAlign)
+            cylinderline.constraints = [SCNLookAtConstraint(target: node1)]
+            
+            conectsNode.addChildNode(cylinderline)
+        }
+        
+        return conectsNode
+    }
+    
 }
 
-
+private extension SCNVector3 {
+    func distance(receiver:SCNVector3) -> Float{
+        let xd = receiver.x - self.x
+        let yd = receiver.y - self.y
+        let zd = receiver.z - self.z
+        return fabs(Float(sqrt(xd * xd + yd * yd + zd * zd)))
+    }
+}

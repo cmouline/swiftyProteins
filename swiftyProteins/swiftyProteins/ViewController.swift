@@ -57,7 +57,7 @@ class ViewController: UIViewController {
     
     func parseHTML() {
         
-        let myURLString = "https://files.rcsb.org/ligands/view/V11_ideal.pdb"
+        let myURLString = "https://files.rcsb.org/ligands/view/GP4_ideal.pdb"
         
         guard let myURL = URL(string: myURLString) else {
             print("Error: \(myURLString) doesn't seem to be a valid URL")
