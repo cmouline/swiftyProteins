@@ -8,8 +8,12 @@
 
 import UIKit
 
-class ProteinListViewController: UITableViewController {
+class ProteinListViewController: UITableViewController, UISearchResultsUpdating {
 
+    var proteinList: [String] = []
+    var filteredProteinList: [String] = []
+    let searchController = UISearchController(searchResultsController: nil)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,34 +22,82 @@ class ProteinListViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        getProteinList()
+        
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
+
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func getProteinList() {
+        
+        let fileURLProject = Bundle.main.path(forResource: "Ligands", ofType: "")
+        
+        do {
+            
+            var readStringProject = try String(contentsOfFile: fileURLProject!, encoding: String.Encoding.utf8)
+            proteinList = readStringProject.characters.split(separator: "\n").map(String.init)
+            print(proteinList)
+            
+        } catch let error as NSError {
+            
+            print("Failed reading from URL: \(fileURLProject), Error: " + error.localizedDescription)
+            
+        }
+        
+    }
+
+    // MARK: - Search Bar and Filter Functions
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchText: searchController.searchBar.text!)
+    }
+
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        print("searchText :\(searchText)")
+        filteredProteinList = proteinList.filter { protein in
+            var hasSubstring = false
+            if protein.lowercased().range(of: searchText.lowercased()) != nil {
+                hasSubstring = true
+            }
+            return hasSubstring
+        }
+
+        tableView.reloadData()
     }
 
     // MARK: - Table view data source
 
+    /*
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 0
     }
-
+    */
+ 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        if searchController.isActive && searchController.searchBar.text != "" {
+            return filteredProteinList.count
+        }
+        return proteinList.count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "proteinCell", for: indexPath)
+        if searchController.isActive && searchController.searchBar.text != "" {
+            cell.textLabel?.text = filteredProteinList[indexPath.row]
+        } else {
+            cell.textLabel?.text = proteinList[indexPath.row]
+        }
         return cell
+
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -91,5 +143,6 @@ class ProteinListViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
 }
+
