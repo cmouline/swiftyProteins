@@ -16,6 +16,14 @@ class ViewController: UIViewController {
     var conectArray: [[(x: Float, y: Float, z: Float, type: String)]] = []
     var atomArray: [(x: Float, y: Float, z: Float, type: String)] = []
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        parseHTML()
+        initScene()
+        
+    }
+    
     func createPairs(conect: [Int]) {
         
         for i in 1..<(conect.count) {
@@ -83,38 +91,18 @@ class ViewController: UIViewController {
         
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        parseHTML()
-        initScene()
-        
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
     func initScene() {
-        sceneView.scene = Scene()
-//        sceneView.size = view.bounds.size;
+        sceneView.scene = Scene(atoms : atomArray, conects : conectArray)
         sceneView.autoenablesDefaultLighting = true
         sceneView.allowsCameraControl = true
         
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        sceneView.stop(nil)
-        sceneView.play(nil)
-    }
-
-    override var shouldAutorotate: Bool {
-        return true
-    }
+//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+//        super.viewWillTransition(to: size, with: coordinator)
+//        sceneView.stop(nil)
+//        sceneView.play(nil)
+//    }
 
 }
 

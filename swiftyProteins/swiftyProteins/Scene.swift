@@ -11,11 +11,16 @@ import SceneKit
 
 class Scene: SCNScene {
 
-    override init() {
+    let conects : [[(x: Float, y: Float, z: Float, type: String)]]
+    var atoms : [(x: Float, y: Float, z: Float, type: String)]
+    
+    init(atoms : [(x: Float, y: Float, z: Float, type: String)], conects : [[(x: Float, y: Float, z: Float, type: String)]]) {
+        self.atoms = atoms
+        self.conects = conects
         super.init()
         
-//        self.size = sceneView.bounds.size;
-//        setLights()
+//        setupLights()
+        setupCamera()
         
 //        let sphereGeometry = SCNSphere(radius: 1.0)
 //        let sphereNode = SCNNode(geometry: sphereGeometry)
@@ -34,7 +39,14 @@ class Scene: SCNScene {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setLights() {
+    func setupCamera() {
+        let cameraNode = SCNNode()
+        cameraNode.camera = SCNCamera()
+        cameraNode.position = SCNVector3(x: 0, y: 0, z: 50)
+        self.rootNode.addChildNode(cameraNode)
+    }
+    
+    func setupLights() {
         let ambientLightNode = SCNNode()
         ambientLightNode.light = SCNLight()
         ambientLightNode.light!.type = SCNLight.LightType.ambient
