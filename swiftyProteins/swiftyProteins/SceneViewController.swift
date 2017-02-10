@@ -19,7 +19,7 @@ class SceneViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        title = ligand
         parseHTML()
         initScene()
         

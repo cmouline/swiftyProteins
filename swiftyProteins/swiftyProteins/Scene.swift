@@ -31,7 +31,7 @@ class Scene: SCNScene {
     func setupCamera() {
         let cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
-        cameraNode.position = SCNVector3(x: 0, y: 0, z: 50)
+        cameraNode.position = SCNVector3(x: 0, y: 0, z: 30)
         self.rootNode.addChildNode(cameraNode)
     }
     
@@ -77,7 +77,7 @@ class Scene: SCNScene {
         case "S" :
             radius = 1.80 * factor
             diffuseColor = UIColor.yellow
-        case "Cl" :
+        case "CL" :
             radius = 1.75 * factor
             diffuseColor = UIColor.green
         default :
