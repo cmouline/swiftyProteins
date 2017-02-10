@@ -110,19 +110,6 @@ class Scene: SCNScene {
         return atomsNode
     }
     
-    func conectGeometry(p1: (x: Float, y: Float, z: Float, type: String), p2: (x: Float, y: Float, z: Float, type: String)) -> SCNGeometry {
-
-        let v1 : SCNVector3 = SCNVector3Make(p1.x, p1.y, p1.z)
-        let v2 : SCNVector3 = SCNVector3Make(p2.x, p2.y, p2.z)
-        let radius : CGFloat = 0.1 //
-        let height = v1.distance(receiver: v2)
-        print(height)//
-        let conect = SCNCylinder(radius: radius, height: CGFloat(height))
-        conect.radialSegmentCount = 10 //
-        conect.firstMaterial?.diffuse.contents = UIColor.black //
-        return conect
-    }
-    
     func allConects() -> SCNNode {
         let conectsNode = SCNNode()
         

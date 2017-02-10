@@ -45,10 +45,17 @@
                             <constraint firstItem="gra-cA-A2A" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="iJo-wH-bZS"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="LigandName" id="7nl-R6-uZX"/>
+                    <navigationItem key="navigationItem" title="LigandName" id="7nl-R6-uZX">
+                        <barButtonItem key="rightBarButtonItem" title="Share" id="Zco-yj-IYy">
+                            <connections>
+                                <action selector="shareAction:" destination="BYZ-38-t0r" id="bbf-Kr-yDf"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="sceneView" destination="lUD-1n-6gR" id="rGP-jS-YTI"/>
                         <outlet property="selectedElementLabel" destination="gra-cA-A2A" id="XYh-WK-hfP"/>
+                        <outlet property="shareButton" destination="Zco-yj-IYy" id="QZq-Iq-lcn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -93,11 +100,11 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aWO-l9-c8w" id="wVP-Gh-AkB">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JX0-76-ANb">
-                                            <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
+                                            <rect key="frame" x="15" y="0.0" width="345" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>

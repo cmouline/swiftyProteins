@@ -13,6 +13,7 @@ class SceneViewController: UIViewController {
 
     @IBOutlet weak var sceneView: SCNView!
     @IBOutlet weak var selectedElementLabel: UILabel!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
     
     var conectArray: [[(x: Float, y: Float, z: Float, type: String)]] = []
     var atomArray: [(x: Float, y: Float, z: Float, type: String)] = []
@@ -127,6 +128,27 @@ class SceneViewController: UIViewController {
 //        sceneView.stop(nil)
 //        sceneView.play(nil)
 //    }
-
+    
+    @IBAction func shareAction(_ sender: UIBarButtonItem) {
+////        let activityItem : NSURL = NSURL(string: "http//:urlyouwant")!
+//        if let image : UIImage = UIImage(named: "ligand") {
+//
+//            let activityViewController : UIActivityViewController = UIActivityViewController(
+//                activityItems: [image], applicationActivities: nil)
+//
+//            // Special iPad
+//            if UIDevice.current.userInterfaceIdiom == .pad {
+//                if activityViewController.responds(to: #selector(getter: UIViewController.popoverPresentationController)) {
+//                    activityViewController.popoverPresentationController?.barButtonItem = shareButton
+//                }
+//            }
+//
+//            self.present(activityViewController, animated: true, completion: nil)
+//        }
+//        else {
+//            print("no image")
+//        }
+    }
+    
 }
 
