@@ -59,6 +59,9 @@ class Scene: SCNScene {
         case "H" :
             radius = 1.20 * factor
             diffuseColor = UIColor.white
+        case "B" :
+            radius = 1.50 * factor //arbitrary
+            diffuseColor = UIColor(red:1.00, green:0.63, blue:0.48, alpha:1.0)
         case "C" :
             radius = 1.70 * factor
             diffuseColor = UIColor.black
