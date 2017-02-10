@@ -9,12 +9,13 @@
 import UIKit
 import SceneKit
 
-class ViewController: UIViewController {
+class SceneViewController: UIViewController {
 
     @IBOutlet weak var sceneView: SCNView!
     
     var conectArray: [[(x: Float, y: Float, z: Float, type: String)]] = []
     var atomArray: [(x: Float, y: Float, z: Float, type: String)] = []
+    var ligand : String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,10 +58,10 @@ class ViewController: UIViewController {
     
     func parseHTML() {
         
-        let myURLString = "https://files.rcsb.org/ligands/view/GP4_ideal.pdb"
+        let myURLString = "https://files.rcsb.org/ligands/view/\(ligand)_ideal.pdb"
         
         guard let myURL = URL(string: myURLString) else {
-            print("Error: \(myURLString) doesn't seem to be a valid URL")
+            print("Error: \(myURLString) doesn't seem to be a valid URL")//changer par un alert
             return
         }
         

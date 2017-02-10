@@ -13,6 +13,7 @@ class ProteinListViewController: UITableViewController, UISearchResultsUpdating 
     var proteinList: [String] = []
     var filteredProteinList: [String] = []
     let searchController = UISearchController(searchResultsController: nil)
+    var selectedLigand : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +41,7 @@ class ProteinListViewController: UITableViewController, UISearchResultsUpdating 
             
             var readStringProject = try String(contentsOfFile: fileURLProject!, encoding: String.Encoding.utf8)
             proteinList = readStringProject.characters.split(separator: "\n").map(String.init)
-            print(proteinList)
+//            print(proteinList)
             
         } catch let error as NSError {
             
@@ -57,7 +58,7 @@ class ProteinListViewController: UITableViewController, UISearchResultsUpdating 
     }
 
     func filterContentForSearchText(searchText: String, scope: String = "All") {
-        print("searchText :\(searchText)")
+//        print("searchText :\(searchText)")
         filteredProteinList = proteinList.filter { protein in
             var hasSubstring = false
             if protein.lowercased().range(of: searchText.lowercased()) != nil {
@@ -99,6 +100,15 @@ class ProteinListViewController: UITableViewController, UISearchResultsUpdating 
 
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.selectedLigand = searchController.isActive && searchController.searchBar.text != "" ?
+            self.filteredProteinList[indexPath.row] : self.proteinList[indexPath.row]
+        print("selected Ligand : \(self.selectedLigand ?? "nil")")
+        if self.selectedLigand != nil {
+            performSegue(withIdentifier: "toScene", sender: self)
+        }
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -133,16 +143,16 @@ class ProteinListViewController: UITableViewController, UISearchResultsUpdating 
         return true
     }
     */
-
-    /*
+    
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+         if segue.identifier == "toScene" {
+             if let vc = segue.destination as? SceneViewController {
+                 vc.ligand = self.selectedLigand!
+             }
+         }
+     }
     
 }
 
