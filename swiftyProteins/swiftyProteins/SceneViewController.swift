@@ -12,6 +12,7 @@ import SceneKit
 class SceneViewController: UIViewController {
 
     @IBOutlet weak var sceneView: SCNView!
+    @IBOutlet weak var selectedElementLabel: UILabel!
     
     var conectArray: [[(x: Float, y: Float, z: Float, type: String)]] = []
     var atomArray: [(x: Float, y: Float, z: Float, type: String)] = []
@@ -20,6 +21,7 @@ class SceneViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = ligand
+        selectedElementLabel.text = ""
         parseHTML()
         initScene()
         
@@ -97,6 +99,27 @@ class SceneViewController: UIViewController {
         sceneView.autoenablesDefaultLighting = true
         sceneView.allowsCameraControl = true
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGesture(recognizer:)))
+        sceneView.addGestureRecognizer(tapGesture)
+    }
+    
+    func tapGesture(recognizer: UITapGestureRecognizer) {
+        let location = recognizer.location(in: sceneView)
+        
+        let hitResults = sceneView.hitTest(location, options: nil)
+        if hitResults.count > 0 {
+            let result = hitResults[0] 
+            let node = result.node
+            if let atom = node.name {
+                selectedElementLabel.text = "Selected element : " + atom.capitalized
+            }
+            else {
+                selectedElementLabel.text = ""
+            }
+        }
+        else {
+            selectedElementLabel.text = ""
+        }
     }
     
 //    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

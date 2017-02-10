@@ -29,17 +29,26 @@
                                     <constraint firstAttribute="width" secondItem="lUD-1n-6gR" secondAttribute="height" multiplier="1:1" id="5Se-ME-ner"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selected element" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gra-cA-A2A" userLabel="Selected element">
+                                <rect key="frame" x="120.5" y="72" width="133.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="lUD-1n-6gR" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Cr1-i4-ukI"/>
                             <constraint firstItem="lUD-1n-6gR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="T7L-ZA-n8n"/>
+                            <constraint firstItem="gra-cA-A2A" firstAttribute="centerX" secondItem="lUD-1n-6gR" secondAttribute="centerX" id="fLo-2f-3P8"/>
                             <constraint firstItem="lUD-1n-6gR" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="fO6-IN-eeL"/>
+                            <constraint firstItem="gra-cA-A2A" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="iJo-wH-bZS"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="LigandName" id="7nl-R6-uZX"/>
                     <connections>
                         <outlet property="sceneView" destination="lUD-1n-6gR" id="rGP-jS-YTI"/>
+                        <outlet property="selectedElementLabel" destination="gra-cA-A2A" id="XYh-WK-hfP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

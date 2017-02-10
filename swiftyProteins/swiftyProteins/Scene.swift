@@ -61,7 +61,7 @@ class Scene: SCNScene {
             diffuseColor = UIColor.white
         case "B" :
             radius = 1.50 * factor //arbitrary
-            diffuseColor = UIColor(red:1.00, green:0.63, blue:0.48, alpha:1.0)
+            diffuseColor = UIColor(red:1.00, green:0.67, blue:0.47, alpha:1.0)
         case "C" :
             radius = 1.70 * factor
             diffuseColor = UIColor.black
@@ -83,6 +83,9 @@ class Scene: SCNScene {
         case "CL" :
             radius = 1.75 * factor
             diffuseColor = UIColor.green
+        case "BR" :
+            radius = 1.85 * factor
+            diffuseColor = UIColor(red:0.60, green:0.13, blue:0.00, alpha:1.0)
         default :
             radius = 2.00 * factor
             diffuseColor = UIColor.magenta
@@ -100,6 +103,7 @@ class Scene: SCNScene {
         for atom in self.atoms {
             let node = SCNNode(geometry: atomGeometry(type: atom.type))
             node.position = SCNVector3Make(atom.x, atom.y, atom.z)
+            node.name = atom.type
             atomsNode.addChildNode(node)
         }
         
