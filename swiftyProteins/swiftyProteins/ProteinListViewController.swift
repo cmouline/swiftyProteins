@@ -40,7 +40,6 @@ class ProteinListViewController: UITableViewController, UISearchResultsUpdating 
             
             var readStringProject = try String(contentsOfFile: fileURLProject!, encoding: String.Encoding.utf8)
             proteinList = readStringProject.characters.split(separator: "\n").map(String.init)
-            print(proteinList)
             
         } catch let error as NSError {
             
@@ -57,7 +56,7 @@ class ProteinListViewController: UITableViewController, UISearchResultsUpdating 
     }
 
     func filterContentForSearchText(searchText: String, scope: String = "All") {
-        print("searchText :\(searchText)")
+
         filteredProteinList = proteinList.filter { protein in
             var hasSubstring = false
             if protein.lowercased().range(of: searchText.lowercased()) != nil {
