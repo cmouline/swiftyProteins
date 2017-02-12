@@ -29,9 +29,12 @@ class SceneViewController: UIViewController {
     }
     
     func createPairs(conect: [Int]) {
+        let atomArrayCount = atomArray.count
         
         for i in 1..<(conect.count) {
-            conectArray.append([atomArray[conect[0]], atomArray[conect[i]]])
+            if conect[0] < atomArrayCount && conect[i]  < atomArrayCount {
+                 conectArray.append([atomArray[conect[0]], atomArray[conect[i]]])
+            }
         }
         
     }
