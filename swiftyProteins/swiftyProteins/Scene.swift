@@ -31,7 +31,7 @@ class Scene: SCNScene {
     func setupCamera() {
         let cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
-        cameraNode.position = SCNVector3(x: 0, y: 0, z: 50)
+        cameraNode.position = SCNVector3(x: 0, y: 0, z: 30)
         self.rootNode.addChildNode(cameraNode)
     }
     
@@ -53,23 +53,42 @@ class Scene: SCNScene {
     func atomGeometry(type : String) -> SCNGeometry {
         var radius : CGFloat
         var diffuseColor : UIColor
+        let factor : CGFloat = 0.1
         
         switch type {
-        case "C" :
-            radius = 1.70 / 10
-            diffuseColor = UIColor.darkGray
         case "H" :
-            radius = 1.20 / 10
-            diffuseColor = UIColor.lightGray
+            radius = 1.20 * factor
+            diffuseColor = UIColor.white
+        case "B" :
+            radius = 1.50 * factor //arbitrary
+            diffuseColor = UIColor(red:1.00, green:0.67, blue:0.47, alpha:1.0)
+        case "C" :
+            radius = 1.70 * factor
+            diffuseColor = UIColor.black
+        case "N" :
+            radius = 1.55 * factor
+            diffuseColor = UIColor.blue
         case "O" :
-            radius = 1.52 / 10
+            radius = 1.52 * factor
             diffuseColor = UIColor.red
         case "F" :
-            radius = 1.47 / 10
+            radius = 1.47 * factor
+            diffuseColor = UIColor.green
+        case "P" :
+            radius = 1.80 * factor
+            diffuseColor = UIColor.orange
+        case "S" :
+            radius = 1.80 * factor
             diffuseColor = UIColor.yellow
+        case "CL" :
+            radius = 1.75 * factor
+            diffuseColor = UIColor.green
+        case "BR" :
+            radius = 1.85 * factor
+            diffuseColor = UIColor(red:0.60, green:0.13, blue:0.00, alpha:1.0)
         default :
-            radius = 1.00 / 10
-            diffuseColor = UIColor.white
+            radius = 2.00 * factor
+            diffuseColor = UIColor.magenta
         }
         
         let atom = SCNSphere(radius: radius)
@@ -84,23 +103,11 @@ class Scene: SCNScene {
         for atom in self.atoms {
             let node = SCNNode(geometry: atomGeometry(type: atom.type))
             node.position = SCNVector3Make(atom.x, atom.y, atom.z)
+            node.name = atom.type
             atomsNode.addChildNode(node)
         }
         
         return atomsNode
-    }
-    
-    func conectGeometry(p1: (x: Float, y: Float, z: Float, type: String), p2: (x: Float, y: Float, z: Float, type: String)) -> SCNGeometry {
-
-        let v1 : SCNVector3 = SCNVector3Make(p1.x, p1.y, p1.z)
-        let v2 : SCNVector3 = SCNVector3Make(p2.x, p2.y, p2.z)
-        let radius : CGFloat = 0.1 //
-        let height = v1.distance(receiver: v2)
-        print(height)//
-        let conect = SCNCylinder(radius: radius, height: CGFloat(height))
-        conect.radialSegmentCount = 10 //
-        conect.firstMaterial?.diffuse.contents = UIColor.black //
-        return conect
     }
     
     func allConects() -> SCNNode {

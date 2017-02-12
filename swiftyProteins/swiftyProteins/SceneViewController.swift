@@ -9,16 +9,20 @@
 import UIKit
 import SceneKit
 
-class ViewController: UIViewController {
+class SceneViewController: UIViewController {
 
     @IBOutlet weak var sceneView: SCNView!
+    @IBOutlet weak var selectedElementLabel: UILabel!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
     
     var conectArray: [[(x: Float, y: Float, z: Float, type: String)]] = []
     var atomArray: [(x: Float, y: Float, z: Float, type: String)] = []
+    var ligand : String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        title = ligand
+        selectedElementLabel.text = ""
         parseHTML()
         initScene()
         
@@ -57,10 +61,10 @@ class ViewController: UIViewController {
     
     func parseHTML() {
         
-        let myURLString = "https://files.rcsb.org/ligands/view/GP4_ideal.pdb"
+        let myURLString = "https://files.rcsb.org/ligands/view/\(ligand)_ideal.pdb"
         
         guard let myURL = URL(string: myURLString) else {
-            print("Error: \(myURLString) doesn't seem to be a valid URL")
+            print("Error: \(myURLString) doesn't seem to be a valid URL")//changer par un alert
             return
         }
         
@@ -96,6 +100,27 @@ class ViewController: UIViewController {
         sceneView.autoenablesDefaultLighting = true
         sceneView.allowsCameraControl = true
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGesture(recognizer:)))
+        sceneView.addGestureRecognizer(tapGesture)
+    }
+    
+    func tapGesture(recognizer: UITapGestureRecognizer) {
+        let location = recognizer.location(in: sceneView)
+        
+        let hitResults = sceneView.hitTest(location, options: nil)
+        if hitResults.count > 0 {
+            let result = hitResults[0] 
+            let node = result.node
+            if let atom = node.name {
+                selectedElementLabel.text = "Selected element : " + atom.capitalized
+            }
+            else {
+                selectedElementLabel.text = ""
+            }
+        }
+        else {
+            selectedElementLabel.text = ""
+        }
     }
     
 //    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -103,6 +128,27 @@ class ViewController: UIViewController {
 //        sceneView.stop(nil)
 //        sceneView.play(nil)
 //    }
-
+    
+    @IBAction func shareAction(_ sender: UIBarButtonItem) {
+////        let activityItem : NSURL = NSURL(string: "http//:urlyouwant")!
+//        if let image : UIImage = UIImage(named: "ligand") {
+//
+//            let activityViewController : UIActivityViewController = UIActivityViewController(
+//                activityItems: [image], applicationActivities: nil)
+//
+//            // Special iPad
+//            if UIDevice.current.userInterfaceIdiom == .pad {
+//                if activityViewController.responds(to: #selector(getter: UIViewController.popoverPresentationController)) {
+//                    activityViewController.popoverPresentationController?.barButtonItem = shareButton
+//                }
+//            }
+//
+//            self.present(activityViewController, animated: true, completion: nil)
+//        }
+//        else {
+//            print("no image")
+//        }
+    }
+    
 }
 

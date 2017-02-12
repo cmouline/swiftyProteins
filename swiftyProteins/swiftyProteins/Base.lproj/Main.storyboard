@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--LigandName-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="swiftyProteins" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="SceneViewController" customModule="swiftyProteins" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -29,16 +29,33 @@
                                     <constraint firstAttribute="width" secondItem="lUD-1n-6gR" secondAttribute="height" multiplier="1:1" id="5Se-ME-ner"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selected element" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gra-cA-A2A" userLabel="Selected element">
+                                <rect key="frame" x="120.5" y="72" width="133.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="lUD-1n-6gR" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Cr1-i4-ukI"/>
                             <constraint firstItem="lUD-1n-6gR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="T7L-ZA-n8n"/>
+                            <constraint firstItem="gra-cA-A2A" firstAttribute="centerX" secondItem="lUD-1n-6gR" secondAttribute="centerX" id="fLo-2f-3P8"/>
                             <constraint firstItem="lUD-1n-6gR" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="fO6-IN-eeL"/>
+                            <constraint firstItem="gra-cA-A2A" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="iJo-wH-bZS"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="LigandName" id="7nl-R6-uZX">
+                        <barButtonItem key="rightBarButtonItem" title="Share" id="Zco-yj-IYy">
+                            <connections>
+                                <action selector="shareAction:" destination="BYZ-38-t0r" id="bbf-Kr-yDf"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="sceneView" destination="lUD-1n-6gR" id="rGP-jS-YTI"/>
+                        <outlet property="selectedElementLabel" destination="gra-cA-A2A" id="XYh-WK-hfP"/>
+                        <outlet property="shareButton" destination="Zco-yj-IYy" id="QZq-Iq-lcn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -70,7 +87,7 @@
             </objects>
             <point key="canvasLocation" x="671" y="256"/>
         </scene>
-        <!--ProteinListView-->
+        <!--Ligands-->
         <scene sceneID="kNW-8R-p3t">
             <objects>
                 <tableViewController id="W95-P4-Exg" customClass="ProteinListViewController" customModule="swiftyProteins" customModuleProvider="target" sceneMemberID="viewController">
@@ -102,13 +119,10 @@
                             <outlet property="delegate" destination="W95-P4-Exg" id="co1-0k-0kd"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="ProteinListView" id="XiZ-Yg-GuH">
-                        <barButtonItem key="rightBarButtonItem" title="Next" id="h0v-Oj-XyO">
-                            <connections>
-                                <segue destination="BYZ-38-t0r" kind="show" id="TJf-C3-KFB"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Ligands" id="XiZ-Yg-GuH"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="toScene" id="eHx-jm-Re1"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tY3-Fb-E8L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
