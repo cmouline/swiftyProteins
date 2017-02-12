@@ -73,19 +73,37 @@
                     <view key="view" contentMode="scaleToFill" id="lOA-b7-43u">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GAH-NH-djb">
+                                <rect key="frame" x="147" y="293" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="Lla-wy-Ake"/>
+                                    <constraint firstAttribute="width" secondItem="GAH-NH-djb" secondAttribute="height" multiplier="1:1" id="NaI-Wk-wqd"/>
+                                </constraints>
+                                <state key="normal" title="Touch ID" image="touch-id-icon"/>
+                                <connections>
+                                    <action selector="touchIDButton:" destination="Fzu-88-y3z" eventType="touchUpInside" id="pOT-8e-yiI"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="GAH-NH-djb" firstAttribute="top" secondItem="SFF-MI-bdL" secondAttribute="bottom" constant="229" id="2oY-4S-Uol"/>
+                            <constraint firstItem="GAH-NH-djb" firstAttribute="centerX" secondItem="lOA-b7-43u" secondAttribute="centerX" id="QNM-O6-E38"/>
+                            <constraint firstItem="GAH-NH-djb" firstAttribute="centerY" secondItem="lOA-b7-43u" secondAttribute="centerY" id="ixN-0a-5tK"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="LoginView" id="8re-2O-neu">
                         <barButtonItem key="rightBarButtonItem" title="Next" id="ifj-33-JwL">
                             <connections>
-                                <segue destination="W95-P4-Exg" kind="show" id="q2A-qI-f8m"/>
+                                <segue destination="W95-P4-Exg" kind="show" identifier="showLigandsList" id="q2A-qI-f8m"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gCw-gE-AqH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="671" y="256"/>
+            <point key="canvasLocation" x="669.60000000000002" y="255.92203898050977"/>
         </scene>
         <!--Ligands-->
         <scene sceneID="kNW-8R-p3t">
@@ -147,4 +165,7 @@
             <point key="canvasLocation" x="-122" y="256"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="touch-id-icon" width="214" height="214"/>
+    </resources>
 </document>

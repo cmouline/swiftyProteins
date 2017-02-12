@@ -105,6 +105,7 @@ class ProteinListViewController: UITableViewController, UISearchResultsUpdating 
             self.filteredProteinList[indexPath.row] : self.proteinList[indexPath.row]
         print("selected Ligand : \(self.selectedLigand ?? "nil")")
         if self.selectedLigand != nil {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
             performSegue(withIdentifier: "toScene", sender: self)
         }
     }

@@ -25,7 +25,7 @@ class SceneViewController: UIViewController {
         selectedElementLabel.text = ""
         parseHTML()
         initScene()
-        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
     
     func createPairs(conect: [Int]) {
