@@ -67,7 +67,7 @@ class SceneViewController: UIViewController {
         let myURLString = "https://files.rcsb.org/ligands/view/\(ligand)_ideal.pdb"
         
         guard let myURL = URL(string: myURLString) else {
-            print("Error: \(myURLString) doesn't seem to be a valid URL")//changer par un alert
+            print("Error: \(myURLString) doesn't seem to be a valid URL") // changer par un alert
             return
         }
         
@@ -90,10 +90,11 @@ class SceneViewController: UIViewController {
                 }
                 
             }
-//            print("ATOMARRAY : \(atomArray)")
-//            print("CONECTARRAY : \(conectArray)")
+            
         } catch let error {
-            print("Error: \(error)")
+            let ac = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
         }
         
     }
