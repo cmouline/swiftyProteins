@@ -35,7 +35,6 @@ class LoginViewController: UIViewController {
                 DispatchQueue.main.async {
                     if success {
                         //                        self.runSecretCode()
-                        print("success")
                         self.performSegue(withIdentifier: "showLigandsList", sender: self)
                     } else {
                         let ac = UIAlertController(title: "Authentication failed", message: "Sorry!", preferredStyle: .alert)

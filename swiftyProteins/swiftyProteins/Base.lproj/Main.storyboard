@@ -88,7 +88,6 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="GAH-NH-djb" firstAttribute="top" secondItem="SFF-MI-bdL" secondAttribute="bottom" constant="229" id="2oY-4S-Uol"/>
                             <constraint firstItem="GAH-NH-djb" firstAttribute="centerX" secondItem="lOA-b7-43u" secondAttribute="centerX" id="QNM-O6-E38"/>
                             <constraint firstItem="GAH-NH-djb" firstAttribute="centerY" secondItem="lOA-b7-43u" secondAttribute="centerY" id="ixN-0a-5tK"/>
                         </constraints>
