@@ -17,6 +17,7 @@
 		721017371E4B3D5F0080CB22 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 721017351E4B3D5F0080CB22 /* LaunchScreen.storyboard */; };
 		725285EB1E4CA3C4001B70C0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725285EA1E4CA3C4001B70C0 /* LoginViewController.swift */; };
 		725285ED1E4CA538001B70C0 /* Ligands in Resources */ = {isa = PBXBuildFile; fileRef = 725285EC1E4CA538001B70C0 /* Ligands */; };
+		8F1821DB1A804CE2A4BEA1C0 /* Pods_swiftyProteins.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F63B0A906BEC00672C271F97 /* Pods_swiftyProteins.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,9 @@
 		721017381E4B3D5F0080CB22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		725285EA1E4CA3C4001B70C0 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		725285EC1E4CA538001B70C0 /* Ligands */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Ligands; sourceTree = "<group>"; };
+		787A03DD52B6B759CAED11C1 /* Pods-swiftyProteins.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftyProteins.release.xcconfig"; path = "Pods/Target Support Files/Pods-swiftyProteins/Pods-swiftyProteins.release.xcconfig"; sourceTree = "<group>"; };
+		BA92DADC008B13104EDECF1B /* Pods-swiftyProteins.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftyProteins.debug.xcconfig"; path = "Pods/Target Support Files/Pods-swiftyProteins/Pods-swiftyProteins.debug.xcconfig"; sourceTree = "<group>"; };
+		F63B0A906BEC00672C271F97 /* Pods_swiftyProteins.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swiftyProteins.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +44,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				39F5E1581E4C757B000126FA /* SceneKit.framework in Frameworks */,
+				8F1821DB1A804CE2A4BEA1C0 /* Pods_swiftyProteins.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				39F5E1571E4C757B000126FA /* SceneKit.framework */,
+				F63B0A906BEC00672C271F97 /* Pods_swiftyProteins.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -60,6 +66,7 @@
 				7210172B1E4B3D5E0080CB22 /* swiftyProteins */,
 				7210172A1E4B3D5E0080CB22 /* Products */,
 				39F5E1561E4C757B000126FA /* Frameworks */,
+				8DB3FFEC9175C6F9FE506B5E /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -88,6 +95,15 @@
 			path = swiftyProteins;
 			sourceTree = "<group>";
 		};
+		8DB3FFEC9175C6F9FE506B5E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BA92DADC008B13104EDECF1B /* Pods-swiftyProteins.debug.xcconfig */,
+				787A03DD52B6B759CAED11C1 /* Pods-swiftyProteins.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -95,9 +111,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7210173B1E4B3D5F0080CB22 /* Build configuration list for PBXNativeTarget "swiftyProteins" */;
 			buildPhases = (
+				B57962E4641C5BE87965D453 /* [CP] Check Pods Manifest.lock */,
 				721017251E4B3D5E0080CB22 /* Sources */,
 				721017261E4B3D5E0080CB22 /* Frameworks */,
 				721017271E4B3D5E0080CB22 /* Resources */,
+				5F31E7A729FE2460AE00957F /* [CP] Embed Pods Frameworks */,
+				2082BF67B2398C2B18BECC1B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -155,6 +174,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2082BF67B2398C2B18BECC1B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-swiftyProteins/Pods-swiftyProteins-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5F31E7A729FE2460AE00957F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-swiftyProteins/Pods-swiftyProteins-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B57962E4641C5BE87965D453 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		721017251E4B3D5E0080CB22 /* Sources */ = {
@@ -286,6 +353,7 @@
 		};
 		7210173C1E4B3D5F0080CB22 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BA92DADC008B13104EDECF1B /* Pods-swiftyProteins.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = swiftyProteins/Info.plist;
@@ -298,6 +366,7 @@
 		};
 		7210173D1E4B3D5F0080CB22 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 787A03DD52B6B759CAED11C1 /* Pods-swiftyProteins.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = swiftyProteins/Info.plist;
