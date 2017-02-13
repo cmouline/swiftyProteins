@@ -26,6 +26,9 @@ class LoginViewController: UIViewController {
             touchIDButtonOutlet.isHidden = true
             let ac = UIAlertController(title: "Touch ID not available", message: "Your device is not configured for Touch ID, you need Touch ID to use this app.", preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "OK", style: .default))
+            ac.view.tintColor = UIColor.red // change text color of the buttons
+            ac.view.backgroundColor = UIColor.red  // change background color
+            ac.view.layer.cornerRadius = 25   // change corner radius
             present(ac, animated: true)
         }
     }
@@ -49,6 +52,9 @@ class LoginViewController: UIViewController {
                 } else {
                     let ac = UIAlertController(title: "Authentication failed", message: "Sorry!", preferredStyle: .alert)
                     ac.addAction(UIAlertAction(title: "OK", style: .default))
+                    ac.view.tintColor = UIColor.red // change text color of the buttons
+                    ac.view.backgroundColor = UIColor.red  // change background color
+                    ac.view.layer.cornerRadius = 25   // change corner radius
                     self.present(ac, animated: true)
                 }
             }

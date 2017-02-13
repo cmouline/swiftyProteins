@@ -92,8 +92,12 @@ class SceneViewController: UIViewController {
             }
             
         } catch let error {
-            let ac = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
+            print("Error: \(error)")
+            let ac = UIAlertController(title: "Error", message: "Something wrong happened with this ligand", preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "OK", style: .default))
+            ac.view.tintColor = UIColor.red // change text color of the buttons
+            ac.view.backgroundColor = UIColor.red  // change background color
+            ac.view.layer.cornerRadius = 25   // change corner radius
             present(ac, animated: true)
         }
         
