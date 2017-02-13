@@ -134,24 +134,24 @@ class SceneViewController: UIViewController {
 //    }
     
     @IBAction func shareAction(_ sender: UIBarButtonItem) {
-////        let activityItem : NSURL = NSURL(string: "http//:urlyouwant")!
-//        if let image : UIImage = UIImage(named: "ligand") {
-//
-//            let activityViewController : UIActivityViewController = UIActivityViewController(
-//                activityItems: [image], applicationActivities: nil)
-//
-//            // Special iPad
-//            if UIDevice.current.userInterfaceIdiom == .pad {
-//                if activityViewController.responds(to: #selector(getter: UIViewController.popoverPresentationController)) {
-//                    activityViewController.popoverPresentationController?.barButtonItem = shareButton
-//                }
-//            }
-//
-//            self.present(activityViewController, animated: true, completion: nil)
-//        }
-//        else {
-//            print("no image")
-//        }
+//        let activityItem : NSURL = NSURL(string: "http//:urlyouwant")!
+        if let image : UIImage = UIImage(named: "ligand") {
+
+            let activityViewController : UIActivityViewController = UIActivityViewController(
+                activityItems: [image], applicationActivities: nil)
+
+            // Special iPad
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                if activityViewController.responds(to: #selector(getter: UIViewController.popoverPresentationController)) {
+                    activityViewController.popoverPresentationController?.barButtonItem = shareButton
+                }
+            }
+
+            self.present(activityViewController, animated: true, completion: nil)
+        }
+        else {
+            print("no image")
+        }
     }
     
 }
