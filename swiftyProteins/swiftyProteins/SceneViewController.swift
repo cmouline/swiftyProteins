@@ -15,8 +15,10 @@ class SceneViewController: UIViewController {
     @IBOutlet weak var selectedElementLabel: UILabel!
     @IBOutlet weak var shareButton: UIBarButtonItem!
     
-    var conectArray: [[(x: Float, y: Float, z: Float, type: String)]] = []
-    var atomArray: [(x: Float, y: Float, z: Float, type: String)] = []
+    var conectArray : [[(x: Float, y: Float, z: Float, type: String)]] = []
+    var atomArray : [(x: Float, y: Float, z: Float, type: String)] = []
+    var sceneType : String = "classic"
+    var hydrogens : Bool = true
     var ligand : String = ""
 
     override func viewDidLoad() {
@@ -67,7 +69,7 @@ class SceneViewController: UIViewController {
         let myURLString = "https://files.rcsb.org/ligands/view/\(ligand)_ideal.pdb"
         
         guard let myURL = URL(string: myURLString) else {
-            print("Error: \(myURLString) doesn't seem to be a valid URL") // changer par un alert
+            print("Error: \(myURLString) doesn't seem to be a valid URL")
             return
         }
         
@@ -100,7 +102,7 @@ class SceneViewController: UIViewController {
     }
     
     func initScene() {
-        sceneView.scene = Scene(atoms : atomArray, conects : conectArray)
+        sceneView.scene = Scene(atoms : atomArray, conects : conectArray, sceneType : sceneType, hydrogens : hydrogens)
         sceneView.autoenablesDefaultLighting = true
         sceneView.allowsCameraControl = true
         
@@ -149,6 +151,23 @@ class SceneViewController: UIViewController {
 
         self.present(activityViewController, animated: true, completion: nil)
     }
+    
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    
+    @IBAction func indexChanged(_ sender: UISegmentedControl) {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            sceneType = "classic"
+        case 1:
+            sceneType = "modern"
+        case 2:
+            sceneType = "compact"
+        default:
+            break
+        }
+        sceneView.scene = Scene(atoms : atomArray, conects : conectArray, sceneType : sceneType, hydrogens : hydrogens)
+    }
+    
     
 }
 

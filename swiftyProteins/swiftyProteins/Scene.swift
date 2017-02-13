@@ -12,11 +12,18 @@ import SceneKit
 class Scene: SCNScene {
 
     let conects : [[(x: Float, y: Float, z: Float, type: String)]]
-    var atoms : [(x: Float, y: Float, z: Float, type: String)]
+    let atoms : [(x: Float, y: Float, z: Float, type: String)]
+    let sceneType : String
+    let hydrogens : Bool
     
-    init(atoms : [(x: Float, y: Float, z: Float, type: String)], conects : [[(x: Float, y: Float, z: Float, type: String)]]) {
+    init(atoms : [(x: Float, y: Float, z: Float, type: String)],
+         conects : [[(x: Float, y: Float, z: Float, type: String)]],
+         sceneType : String,
+         hydrogens : Bool) {
         self.atoms = atoms
         self.conects = conects
+        self.sceneType = sceneType
+        self.hydrogens = hydrogens
         super.init()
         setupCamera()
 //        setupLights()
@@ -64,7 +71,7 @@ class Scene: SCNScene {
             diffuseColor = UIColor(red:1.00, green:0.67, blue:0.47, alpha:1.0)
         case "C" :
             radius = 1.70 * factor
-            diffuseColor = UIColor.black
+            diffuseColor = sceneType == "modern" ? UIColor.black : UIColor.darkGray
         case "N" :
             radius = 1.55 * factor
             diffuseColor = UIColor.blue
@@ -91,6 +98,15 @@ class Scene: SCNScene {
             diffuseColor = UIColor.magenta
         }
         
+        switch sceneType {
+        case "classic":
+            radius = 0.5
+        case "compact":
+            radius = 1
+        default:
+            break
+        }
+        
         let atom = SCNSphere(radius: radius)
         atom.firstMaterial!.diffuse.contents = diffuseColor
         atom.firstMaterial!.specular.contents = UIColor.white
@@ -113,34 +129,35 @@ class Scene: SCNScene {
     func allConects() -> SCNNode {
         let conectsNode = SCNNode()
         
-        for conect in self.conects {
+        if sceneType != "compact" {
+            for conect in self.conects {
 
-            let v0 : SCNVector3 = SCNVector3Make(conect[0].x, conect[0].y, conect[0].z)
-            let v1 : SCNVector3 = SCNVector3Make(conect[1].x, conect[1].y, conect[1].z)
-            let radius : CGFloat = 0.01 //
-            let height = v0.distance(receiver: v1)
-            let geometry = SCNCylinder(radius: radius, height: CGFloat(height))
-            geometry.radialSegmentCount = 10 //
-            geometry.firstMaterial?.diffuse.contents = UIColor.black //
-            
-            let cylinderline = SCNNode()
-            cylinderline.position = v0
-            let node1 = SCNNode()
-            node1.position = v1
-            conectsNode.addChildNode(node1)
-            
-            let zAlign = SCNNode()
-            zAlign.eulerAngles.x = Float(M_PI_2)
-            
-            let node = SCNNode(geometry: geometry)
-            node.position.y = -height / 2
-            zAlign.addChildNode(node)
-            cylinderline.addChildNode(zAlign)
-            cylinderline.constraints = [SCNLookAtConstraint(target: node1)]
-            
-            conectsNode.addChildNode(cylinderline)
+                let v0 : SCNVector3 = SCNVector3Make(conect[0].x, conect[0].y, conect[0].z)
+                let v1 : SCNVector3 = SCNVector3Make(conect[1].x, conect[1].y, conect[1].z)
+                let radius : CGFloat = 0.01 //
+                let height = v0.distance(receiver: v1)
+                let geometry = SCNCylinder(radius: radius, height: CGFloat(height))
+                geometry.radialSegmentCount = 10 //
+                geometry.firstMaterial?.diffuse.contents = UIColor.black //
+                
+                let cylinderline = SCNNode()
+                cylinderline.position = v0
+                let node1 = SCNNode()
+                node1.position = v1
+                conectsNode.addChildNode(node1)
+                
+                let zAlign = SCNNode()
+                zAlign.eulerAngles.x = Float(M_PI_2)
+                
+                let node = SCNNode(geometry: geometry)
+                node.position.y = -height / 2
+                zAlign.addChildNode(node)
+                cylinderline.addChildNode(zAlign)
+                cylinderline.constraints = [SCNLookAtConstraint(target: node1)]
+                
+                conectsNode.addChildNode(cylinderline)
+            }
         }
-        
         return conectsNode
     }
     
