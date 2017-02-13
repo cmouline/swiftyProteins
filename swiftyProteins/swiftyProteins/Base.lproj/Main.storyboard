@@ -30,19 +30,41 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selected element" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gra-cA-A2A" userLabel="Selected element">
-                                <rect key="frame" x="120.5" y="72" width="133.5" height="21"/>
+                                <rect key="frame" x="121.5" y="72" width="133.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="49N-uP-QLF">
+                                <rect key="frame" x="40.5" y="629" width="294" height="30"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Mfr-bZ-SEG">
+                                        <rect key="frame" x="0.0" y="0.0" width="209" height="31"/>
+                                        <segments>
+                                            <segment title="Classic"/>
+                                            <segment title="Modern"/>
+                                            <segment title="Compact"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="indexChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="fXB-UX-Z0U"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8qj-BM-awQ">
+                                        <rect key="frame" x="219" y="0.0" width="75" height="30"/>
+                                        <state key="normal" title="Hydrogens"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="lUD-1n-6gR" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Cr1-i4-ukI"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="49N-uP-QLF" secondAttribute="bottom" constant="8" symbolic="YES" id="G0c-XE-qZ6"/>
                             <constraint firstItem="lUD-1n-6gR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="T7L-ZA-n8n"/>
                             <constraint firstItem="gra-cA-A2A" firstAttribute="centerX" secondItem="lUD-1n-6gR" secondAttribute="centerX" id="fLo-2f-3P8"/>
                             <constraint firstItem="lUD-1n-6gR" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="fO6-IN-eeL"/>
                             <constraint firstItem="gra-cA-A2A" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="iJo-wH-bZS"/>
+                            <constraint firstItem="49N-uP-QLF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kWd-Bw-B8I"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="LigandName" id="7nl-R6-uZX">
@@ -54,6 +76,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="sceneView" destination="lUD-1n-6gR" id="rGP-jS-YTI"/>
+                        <outlet property="segmentedControl" destination="Mfr-bZ-SEG" id="j8z-7v-oHJ"/>
                         <outlet property="selectedElementLabel" destination="gra-cA-A2A" id="XYh-WK-hfP"/>
                         <outlet property="shareButton" destination="Zco-yj-IYy" id="QZq-Iq-lcn"/>
                     </connections>
@@ -122,6 +145,15 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aWO-l9-c8w" id="wVP-Gh-AkB">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JX0-76-ANb">
+                                            <rect key="frame" x="15" y="0.0" width="345" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
