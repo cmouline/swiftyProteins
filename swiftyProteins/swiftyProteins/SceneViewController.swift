@@ -140,7 +140,6 @@ class SceneViewController: UIViewController {
             let xmlDoc = try AEXMLDocument(xml: xml!, options: AEXMLOptions())
             
             ligandData = (ligand: ligand, chemicalName: xmlDoc.root["ligandInfo"]["ligand"]["chemicalName"].value ?? "chemicalNameDefault", formula: xmlDoc.root["ligandInfo"]["ligand"]["formula"].value ?? "formulaDefault")
-            print("ligandData: \(ligandData)")
             
             DispatchQueue.main.async {
                 // display data

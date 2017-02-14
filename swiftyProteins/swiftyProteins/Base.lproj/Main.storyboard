@@ -119,13 +119,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="vZd-PA-YHC">
+                                <rect key="frame" x="0.0" y="64" width="375" height="667"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GAH-NH-djb">
                                 <rect key="frame" x="147" y="293" width="80" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="Lla-wy-Ake"/>
                                     <constraint firstAttribute="width" secondItem="GAH-NH-djb" secondAttribute="height" multiplier="1:1" id="NaI-Wk-wqd"/>
                                 </constraints>
-                                <state key="normal" title="Touch ID" image="touch-id-icon"/>
+                                <state key="normal" title="Touch ID" image="touch-id-icon-transparent"/>
                                 <connections>
                                     <action selector="touchIDButton:" destination="Fzu-88-y3z" eventType="touchUpInside" id="pOT-8e-yiI"/>
                                 </connections>
@@ -133,7 +136,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="vZd-PA-YHC" firstAttribute="top" secondItem="SFF-MI-bdL" secondAttribute="bottom" id="9zX-sg-FnH"/>
                             <constraint firstItem="GAH-NH-djb" firstAttribute="centerX" secondItem="lOA-b7-43u" secondAttribute="centerX" id="QNM-O6-E38"/>
+                            <constraint firstItem="vZd-PA-YHC" firstAttribute="width" secondItem="lOA-b7-43u" secondAttribute="width" id="Qye-Wu-sw5"/>
+                            <constraint firstItem="vZd-PA-YHC" firstAttribute="height" secondItem="lOA-b7-43u" secondAttribute="height" id="R0l-cL-B3v"/>
+                            <constraint firstItem="vZd-PA-YHC" firstAttribute="centerX" secondItem="GAH-NH-djb" secondAttribute="centerX" id="Vsp-nV-B2T"/>
                             <constraint firstItem="GAH-NH-djb" firstAttribute="centerY" secondItem="lOA-b7-43u" secondAttribute="centerY" id="ixN-0a-5tK"/>
                         </constraints>
                     </view>
@@ -222,6 +229,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="touch-id-icon" width="214" height="214"/>
+        <image name="background" width="1154" height="1080"/>
+        <image name="touch-id-icon-transparent" width="214" height="214"/>
     </resources>
 </document>
