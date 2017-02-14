@@ -224,6 +224,11 @@ class SceneViewController: UIViewController {
         sceneView.scene = Scene(atoms : atomArray, conects : conectArray, sceneType : sceneType, hydrogens : hydrogens)
     }
     
+    @IBAction func displayHydrogens(_ sender: UIButton) {
+        hydrogens = !hydrogens
+        sceneView.scene = Scene(atoms : atomArray, conects : conectArray, sceneType : sceneType, hydrogens : hydrogens)
+    }
+    
     
 }
 
