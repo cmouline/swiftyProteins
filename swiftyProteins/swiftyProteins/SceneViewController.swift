@@ -193,7 +193,10 @@ class SceneViewController: UIViewController {
     
     @IBAction func shareAction(_ sender: UIBarButtonItem) {
 
-        let image : UIImage = sceneView.snapshot()
+        let renderer = UIGraphicsImageRenderer(size: sceneView.bounds.size)
+        let image = renderer.image { ctx in
+            sceneView.drawHierarchy(in: sceneView.bounds, afterScreenUpdates: true)
+        }
 
         let activityViewController : UIActivityViewController = UIActivityViewController(
             activityItems: [image], applicationActivities: nil)
