@@ -24,10 +24,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lUD-1n-6gR" customClass="SCNView">
-                                <rect key="frame" x="0.0" y="146" width="375" height="375"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="557"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selected element" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gra-cA-A2A" userLabel="Selected element">
+                                        <rect key="frame" x="120" y="528" width="134" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="lUD-1n-6gR" secondAttribute="height" multiplier="1:1" id="5Se-ME-ner"/>
+                                    <constraint firstItem="gra-cA-A2A" firstAttribute="bottom" secondItem="lUD-1n-6gR" secondAttribute="bottomMargin" id="77f-OQ-hSk"/>
+                                    <constraint firstItem="gra-cA-A2A" firstAttribute="centerX" secondItem="lUD-1n-6gR" secondAttribute="centerX" id="Szl-VQ-Gdc"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="49N-uP-QLF">
@@ -52,6 +61,9 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="QAv-yD-E5o"/>
+                                </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="chemicalName" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="96t-lG-pDM">
                                 <rect key="frame" x="16" y="72" width="343" height="18"/>
@@ -60,34 +72,27 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="formula" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dcK-Em-5pf">
-                                <rect key="frame" x="16" y="98.5" width="343" height="18"/>
+                                <rect key="frame" x="16" y="98" width="343" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selected element" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gra-cA-A2A" userLabel="Selected element">
-                                <rect key="frame" x="121.5" y="529" width="133.5" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.87439903846153855" green="0.87439903846153855" blue="0.87439903846153855" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="lUD-1n-6gR" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Cr1-i4-ukI"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="49N-uP-QLF" secondAttribute="bottom" constant="8" symbolic="YES" id="G0c-XE-qZ6"/>
                             <constraint firstAttribute="leadingMargin" secondItem="dcK-Em-5pf" secondAttribute="leading" id="OPG-fQ-hQN"/>
+                            <constraint firstItem="lUD-1n-6gR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="RJ1-mt-Ztu"/>
                             <constraint firstAttribute="trailingMargin" secondItem="96t-lG-pDM" secondAttribute="trailing" id="RRr-I7-3eE"/>
                             <constraint firstItem="lUD-1n-6gR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="T7L-ZA-n8n"/>
                             <constraint firstItem="96t-lG-pDM" firstAttribute="leading" secondItem="dcK-Em-5pf" secondAttribute="leading" id="TKn-Nf-xWi"/>
-                            <constraint firstItem="gra-cA-A2A" firstAttribute="top" secondItem="lUD-1n-6gR" secondAttribute="bottom" constant="8" id="UFE-ck-dT4"/>
                             <constraint firstAttribute="trailingMargin" secondItem="dcK-Em-5pf" secondAttribute="trailing" id="Yua-GJ-3Rb"/>
                             <constraint firstItem="dcK-Em-5pf" firstAttribute="top" secondItem="96t-lG-pDM" secondAttribute="bottom" constant="8" symbolic="YES" id="ZJ6-hg-E0a"/>
                             <constraint firstAttribute="leadingMargin" secondItem="96t-lG-pDM" secondAttribute="leading" id="caP-YL-XWT"/>
-                            <constraint firstItem="gra-cA-A2A" firstAttribute="centerX" secondItem="lUD-1n-6gR" secondAttribute="centerX" id="fLo-2f-3P8"/>
                             <constraint firstItem="lUD-1n-6gR" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="fO6-IN-eeL"/>
                             <constraint firstItem="96t-lG-pDM" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="gnK-Ze-zw8"/>
                             <constraint firstItem="49N-uP-QLF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kWd-Bw-B8I"/>
+                            <constraint firstItem="49N-uP-QLF" firstAttribute="top" secondItem="lUD-1n-6gR" secondAttribute="bottom" constant="8" symbolic="YES" id="qFn-zX-Tnd"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="LigandName" id="7nl-R6-uZX">

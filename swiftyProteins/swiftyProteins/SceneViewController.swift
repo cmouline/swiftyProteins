@@ -185,11 +185,11 @@ class SceneViewController: UIViewController {
         }
     }
     
-//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//        super.viewWillTransition(to: size, with: coordinator)
-//        sceneView.stop(nil)
-//        sceneView.play(nil)
-//    }
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        sceneView.stop(nil)
+        sceneView.play(nil)
+    }
     
     @IBAction func shareAction(_ sender: UIBarButtonItem) {
 
