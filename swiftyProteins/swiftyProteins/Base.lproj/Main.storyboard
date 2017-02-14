@@ -30,14 +30,8 @@
                                     <constraint firstAttribute="width" secondItem="lUD-1n-6gR" secondAttribute="height" multiplier="1:1" id="5Se-ME-ner"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selected element" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gra-cA-A2A" userLabel="Selected element">
-                                <rect key="frame" x="121.5" y="72" width="133.5" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="49N-uP-QLF">
-                                <rect key="frame" x="40.5" y="629" width="294" height="30"/>
+                                <rect key="frame" x="41" y="629" width="294" height="30"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Mfr-bZ-SEG">
                                         <rect key="frame" x="0.0" y="0.0" width="209" height="31"/>
@@ -56,15 +50,40 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="chemicalName" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="96t-lG-pDM">
+                                <rect key="frame" x="16" y="72" width="343" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="formula" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dcK-Em-5pf">
+                                <rect key="frame" x="16" y="98.5" width="343" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selected element" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gra-cA-A2A" userLabel="Selected element">
+                                <rect key="frame" x="121.5" y="529" width="133.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.87439903846153855" green="0.87439903846153855" blue="0.87439903846153855" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="lUD-1n-6gR" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Cr1-i4-ukI"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="49N-uP-QLF" secondAttribute="bottom" constant="8" symbolic="YES" id="G0c-XE-qZ6"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="dcK-Em-5pf" secondAttribute="leading" id="OPG-fQ-hQN"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="96t-lG-pDM" secondAttribute="trailing" id="RRr-I7-3eE"/>
                             <constraint firstItem="lUD-1n-6gR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="T7L-ZA-n8n"/>
+                            <constraint firstItem="96t-lG-pDM" firstAttribute="leading" secondItem="dcK-Em-5pf" secondAttribute="leading" id="TKn-Nf-xWi"/>
+                            <constraint firstItem="gra-cA-A2A" firstAttribute="top" secondItem="lUD-1n-6gR" secondAttribute="bottom" constant="8" id="UFE-ck-dT4"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="dcK-Em-5pf" secondAttribute="trailing" id="Yua-GJ-3Rb"/>
+                            <constraint firstItem="dcK-Em-5pf" firstAttribute="top" secondItem="96t-lG-pDM" secondAttribute="bottom" constant="8" symbolic="YES" id="ZJ6-hg-E0a"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="96t-lG-pDM" secondAttribute="leading" id="caP-YL-XWT"/>
                             <constraint firstItem="gra-cA-A2A" firstAttribute="centerX" secondItem="lUD-1n-6gR" secondAttribute="centerX" id="fLo-2f-3P8"/>
                             <constraint firstItem="lUD-1n-6gR" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="fO6-IN-eeL"/>
-                            <constraint firstItem="gra-cA-A2A" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="iJo-wH-bZS"/>
+                            <constraint firstItem="96t-lG-pDM" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="gnK-Ze-zw8"/>
                             <constraint firstItem="49N-uP-QLF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kWd-Bw-B8I"/>
                         </constraints>
                     </view>
@@ -76,6 +95,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="chemicalNameLabel" destination="96t-lG-pDM" id="bMR-VA-4hg"/>
+                        <outlet property="formulaLabel" destination="dcK-Em-5pf" id="YLR-bO-Pw6"/>
                         <outlet property="sceneView" destination="lUD-1n-6gR" id="rGP-jS-YTI"/>
                         <outlet property="segmentedControl" destination="Mfr-bZ-SEG" id="j8z-7v-oHJ"/>
                         <outlet property="selectedElementLabel" destination="gra-cA-A2A" id="XYh-WK-hfP"/>
@@ -84,9 +105,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2254" y="256"/>
+            <point key="canvasLocation" x="2253.5999999999999" y="255.92203898050977"/>
         </scene>
-        <!--Login View Controller-->
+        <!--Login-->
         <scene sceneID="Vk9-eU-9T9">
             <objects>
                 <viewController id="Fzu-88-y3z" customClass="LoginViewController" customModule="swiftyProteins" customModuleProvider="target" sceneMemberID="viewController">
@@ -116,7 +137,7 @@
                             <constraint firstItem="GAH-NH-djb" firstAttribute="centerY" secondItem="lOA-b7-43u" secondAttribute="centerY" id="ixN-0a-5tK"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="8re-2O-neu">
+                    <navigationItem key="navigationItem" title="Login" id="8re-2O-neu">
                         <barButtonItem key="rightBarButtonItem" title="Next" id="ifj-33-JwL">
                             <connections>
                                 <segue destination="W95-P4-Exg" kind="show" identifier="showLigandsList" id="q2A-qI-f8m"/>

@@ -14,6 +14,8 @@ class SceneViewController: UIViewController {
 
     @IBOutlet weak var sceneView: SCNView!
     @IBOutlet weak var selectedElementLabel: UILabel!
+    @IBOutlet weak var chemicalNameLabel: UILabel!
+    @IBOutlet weak var formulaLabel: UILabel!
     @IBOutlet weak var shareButton: UIBarButtonItem!
     
     var conectArray : [[(x: Float, y: Float, z: Float, type: String)]] = []
@@ -142,6 +144,13 @@ class SceneViewController: UIViewController {
             
             DispatchQueue.main.async {
                 // display data
+                if let chemicalName = self.ligandData?.chemicalName {
+                    self.chemicalNameLabel.text = "Chemical name : \(chemicalName)"
+                }
+                if let formula = self.ligandData?.formula {
+                    self.formulaLabel.text = "Formula : \(formula)"
+                }
+                
             }
             
         } catch {
