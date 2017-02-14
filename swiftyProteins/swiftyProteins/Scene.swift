@@ -126,6 +126,11 @@ class Scene: SCNScene {
         let atomsNode = SCNNode()
         
         for atom in self.atoms {
+            
+            if hydrogens == false && atom.type == "H" {
+                continue
+            }
+            
             let node = SCNNode(geometry: atomGeometry(type: atom.type))
             node.position = SCNVector3Make(atom.x, atom.y, atom.z)
             node.name = atom.type
@@ -140,6 +145,10 @@ class Scene: SCNScene {
         
         if sceneType != "compact" {
             for conect in self.conects {
+                
+                if hydrogens == false && (conect[0].type == "H" || conect[1].type == "H") {
+                    continue
+                }
 
                 let v0 : SCNVector3 = SCNVector3Make(conect[0].x, conect[0].y, conect[0].z)
                 let v1 : SCNVector3 = SCNVector3Make(conect[1].x, conect[1].y, conect[1].z)
@@ -149,7 +158,6 @@ class Scene: SCNScene {
                     let radius : CGFloat = 0.01 //
                     
                     let geometry = SCNCylinder(radius: radius, height: CGFloat(height))
-                    geometry.radialSegmentCount = 10 //
                     geometry.firstMaterial?.diffuse.contents = UIColor.black //
                     
                     let cylinderline = SCNNode()
@@ -173,11 +181,9 @@ class Scene: SCNScene {
                     let radius : CGFloat = 0.2 //
                     
                     let geometry0 = SCNCylinder(radius: radius, height: CGFloat(height / 2))
-                    geometry0.radialSegmentCount = 10 //
                     geometry0.firstMaterial?.diffuse.contents = diffuseColor(type: conect[0].type)
                     
                     let geometry1 = SCNCylinder(radius: radius, height: CGFloat(height / 2))
-                    geometry1.radialSegmentCount = 10 //
                     geometry1.firstMaterial?.diffuse.contents = diffuseColor(type: conect[1].type)
                     
                     let cylinderline0 = SCNNode()
