@@ -30,7 +30,7 @@ class ProteinListViewController: UITableViewController, UISearchResultsUpdating 
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
-
+        searchController.searchBar.autocapitalizationType = UITextAutocapitalizationType.allCharacters
     }
     
     func getProteinList() {
@@ -52,13 +52,13 @@ class ProteinListViewController: UITableViewController, UISearchResultsUpdating 
     }
 
     // MARK: - Search Bar and Filter Functions
-    
+
     func updateSearchResults(for searchController: UISearchController) {
         filterContentForSearchText(searchText: searchController.searchBar.text!)
     }
 
     func filterContentForSearchText(searchText: String, scope: String = "All") {
-//        print("searchText :\(searchText)")
+
         filteredProteinList = proteinList.filter { protein in
             var hasSubstring = false
             if protein.lowercased().range(of: searchText.lowercased()) != nil {
@@ -95,6 +95,11 @@ class ProteinListViewController: UITableViewController, UISearchResultsUpdating 
             cell.protein = filteredProteinList[indexPath.row]
         } else {
             cell.protein = proteinList[indexPath.row]
+        }
+        if indexPath.row % 2 == 0 {
+            cell.backgroundColor? = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        } else {
+            cell.backgroundColor? = UIColor(red:1.00, green:1.00, blue:1.00, alpha:1.0)
         }
         return cell
 
