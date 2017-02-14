@@ -144,45 +144,25 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aWO-l9-c8w" id="wVP-Gh-AkB">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ligand" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kxa-jI-dq7">
-                                            <rect key="frame" x="8" y="0.0" width="52" height="21"/>
+                                            <rect key="frame" x="8" y="12" width="52" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="52" id="v7j-uj-oUj"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chemical Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RLl-PF-GOB">
-                                            <rect key="frame" x="8" y="22" width="375" height="14.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Formula" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="soa-BO-eD8">
-                                            <rect key="frame" x="68" y="0.0" width="299" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="soa-BO-eD8" firstAttribute="leading" secondItem="kxa-jI-dq7" secondAttribute="trailing" constant="8" symbolic="YES" id="E5H-xj-zDA"/>
-                                        <constraint firstItem="RLl-PF-GOB" firstAttribute="width" secondItem="wVP-Gh-AkB" secondAttribute="width" id="JSu-bO-5db"/>
-                                        <constraint firstItem="RLl-PF-GOB" firstAttribute="top" secondItem="kxa-jI-dq7" secondAttribute="bottom" constant="1" id="UmL-Vj-S7o"/>
-                                        <constraint firstItem="kxa-jI-dq7" firstAttribute="baseline" secondItem="soa-BO-eD8" secondAttribute="baseline" id="eyO-9t-ZSU"/>
-                                        <constraint firstItem="soa-BO-eD8" firstAttribute="trailing" secondItem="wVP-Gh-AkB" secondAttribute="trailingMargin" id="kj1-9E-mYU"/>
-                                        <constraint firstItem="kxa-jI-dq7" firstAttribute="leading" secondItem="RLl-PF-GOB" secondAttribute="leading" id="oYm-VZ-VIE"/>
                                         <constraint firstItem="kxa-jI-dq7" firstAttribute="leading" secondItem="wVP-Gh-AkB" secondAttribute="leadingMargin" id="u7e-AX-uKi"/>
-                                        <constraint firstItem="kxa-jI-dq7" firstAttribute="top" secondItem="wVP-Gh-AkB" secondAttribute="top" id="zP2-HZ-0W5"/>
+                                        <constraint firstItem="kxa-jI-dq7" firstAttribute="top" secondItem="wVP-Gh-AkB" secondAttribute="top" constant="12" id="zP2-HZ-0W5"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="chemicalNameLabel" destination="RLl-PF-GOB" id="Eg6-MN-H9A"/>
-                                    <outlet property="formulaLabel" destination="soa-BO-eD8" id="D5y-6M-avx"/>
                                     <outlet property="ligandLabel" destination="kxa-jI-dq7" id="TYA-y5-x0w"/>
                                 </connections>
                             </tableViewCell>

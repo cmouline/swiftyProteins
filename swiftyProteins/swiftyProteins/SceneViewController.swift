@@ -8,6 +8,7 @@
 
 import UIKit
 import SceneKit
+import AEXML
 
 class SceneViewController: UIViewController {
 
@@ -20,11 +21,14 @@ class SceneViewController: UIViewController {
     var sceneType : String = "classic"
     var hydrogens : Bool = true
     var ligand : String = ""
+    var xml: Data?
+    var ligandData : (ligand: String, chemicalName: String, formula: String)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = ligand
         selectedElementLabel.text = ""
+        getXML()
         parseHTML()
         initScene()
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
@@ -103,6 +107,46 @@ class SceneViewController: UIViewController {
             present(ac, animated: true)
         }
         
+    }
+    
+    func getXML() {
+        
+        let url = NSURL(string: "http://www.rcsb.org/pdb/rest/describeHet?chemicalID=\(ligand)")
+        let request = NSMutableURLRequest(url: url! as URL)
+        request.httpMethod = "GET"
+        
+        let task = URLSession.shared.dataTask(with: request as URLRequest) {
+            (data, response, error) in
+            if let err = error {
+                print("error1")
+                print(err)
+            } else if let d = data {
+                
+                self.xml = d
+                self.parseXML()
+                
+            }
+            
+        }
+        task.resume()
+    }
+    
+    func parseXML() {
+        
+        do {
+            
+            let xmlDoc = try AEXMLDocument(xml: xml!, options: AEXMLOptions())
+            
+            ligandData = (ligand: ligand, chemicalName: xmlDoc.root["ligandInfo"]["ligand"]["chemicalName"].value ?? "chemicalNameDefault", formula: xmlDoc.root["ligandInfo"]["ligand"]["formula"].value ?? "formulaDefault")
+            print("ligandData: \(ligandData)")
+            
+            DispatchQueue.main.async {
+                // display data
+            }
+            
+        } catch {
+            print("\(error)")
+        }
     }
     
     func initScene() {
