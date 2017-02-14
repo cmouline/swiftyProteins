@@ -57,58 +57,67 @@ class Scene: SCNScene {
         self.rootNode.addChildNode(omniLightNode)
     }
     
-    func atomGeometry(type : String) -> SCNGeometry {
-        var radius : CGFloat
-        var diffuseColor : UIColor
-        let factor : CGFloat = 0.1
-        
+    func diffuseColor(type : String) -> UIColor {
         switch type {
         case "H" :
-            radius = 1.20 * factor
-            diffuseColor = UIColor.white
+            return UIColor.white
         case "B" :
-            radius = 1.50 * factor //arbitrary
-            diffuseColor = UIColor(red:1.00, green:0.67, blue:0.47, alpha:1.0)
+            return UIColor(red:1.00, green:0.67, blue:0.47, alpha:1.0)
         case "C" :
-            radius = 1.70 * factor
-            diffuseColor = sceneType == "modern" ? UIColor.black : UIColor.darkGray
+            return sceneType == "modern" ? UIColor.black : UIColor.darkGray
         case "N" :
-            radius = 1.55 * factor
-            diffuseColor = UIColor.blue
+            return UIColor.blue
         case "O" :
-            radius = 1.52 * factor
-            diffuseColor = UIColor.red
-        case "F" :
-            radius = 1.47 * factor
-            diffuseColor = UIColor.green
+            return UIColor.red
+        case "F", "CL" :
+            return UIColor.green
         case "P" :
-            radius = 1.80 * factor
-            diffuseColor = UIColor.orange
+            return UIColor.orange
         case "S" :
-            radius = 1.80 * factor
-            diffuseColor = UIColor.yellow
-        case "CL" :
-            radius = 1.75 * factor
-            diffuseColor = UIColor.green
+            return UIColor.yellow
         case "BR" :
-            radius = 1.85 * factor
-            diffuseColor = UIColor(red:0.60, green:0.13, blue:0.00, alpha:1.0)
+            return UIColor(red:0.60, green:0.13, blue:0.00, alpha:1.0)
         default :
-            radius = 2.00 * factor
-            diffuseColor = UIColor.magenta
+            return UIColor.magenta
         }
-        
+    }
+    
+    func vanDerWaals(type : String) -> CGFloat {
+        switch type {
+        case "H" :
+            return 1.20
+        case "C" :
+            return 1.70
+        case "N" :
+            return 1.55
+        case "O" :
+            return 1.52
+        case "F" :
+            return 1.47
+        case "P", "S" :
+            return 1.80
+        case "CL" :
+            return 1.75
+        case "BR" :
+            return 1.85
+        default :
+            return 2.00
+        }
+    }
+    
+    func atomGeometry(type : String) -> SCNGeometry {
+        var radius : CGFloat
         switch sceneType {
         case "classic":
             radius = 0.5
-        case "compact":
-            radius = 1
+        case "modern":
+            radius = vanDerWaals(type: type) * 0.1
         default:
-            break
+            radius = 1
         }
         
         let atom = SCNSphere(radius: radius)
-        atom.firstMaterial!.diffuse.contents = diffuseColor
+        atom.firstMaterial!.diffuse.contents = diffuseColor(type: type)
         atom.firstMaterial!.specular.contents = UIColor.white
         return atom
     }
@@ -134,28 +143,75 @@ class Scene: SCNScene {
 
                 let v0 : SCNVector3 = SCNVector3Make(conect[0].x, conect[0].y, conect[0].z)
                 let v1 : SCNVector3 = SCNVector3Make(conect[1].x, conect[1].y, conect[1].z)
-                let radius : CGFloat = 0.01 //
                 let height = v0.distance(receiver: v1)
-                let geometry = SCNCylinder(radius: radius, height: CGFloat(height))
-                geometry.radialSegmentCount = 10 //
-                geometry.firstMaterial?.diffuse.contents = UIColor.black //
                 
-                let cylinderline = SCNNode()
-                cylinderline.position = v0
-                let node1 = SCNNode()
-                node1.position = v1
-                conectsNode.addChildNode(node1)
-                
-                let zAlign = SCNNode()
-                zAlign.eulerAngles.x = Float(M_PI_2)
-                
-                let node = SCNNode(geometry: geometry)
-                node.position.y = -height / 2
-                zAlign.addChildNode(node)
-                cylinderline.addChildNode(zAlign)
-                cylinderline.constraints = [SCNLookAtConstraint(target: node1)]
-                
-                conectsNode.addChildNode(cylinderline)
+                if sceneType == "modern" {
+                    let radius : CGFloat = 0.01 //
+                    
+                    let geometry = SCNCylinder(radius: radius, height: CGFloat(height))
+                    geometry.radialSegmentCount = 10 //
+                    geometry.firstMaterial?.diffuse.contents = UIColor.black //
+                    
+                    let cylinderline = SCNNode()
+                    cylinderline.position = v0
+                    let node1 = SCNNode()
+                    node1.position = v1
+                    conectsNode.addChildNode(node1)
+                    
+                    let zAlign = SCNNode()
+                    zAlign.eulerAngles.x = Float(M_PI_2)
+                    
+                    let node = SCNNode(geometry: geometry)
+                    node.position.y = -height / 2
+                    zAlign.addChildNode(node)
+                    cylinderline.addChildNode(zAlign)
+                    cylinderline.constraints = [SCNLookAtConstraint(target: node1)]
+                    
+                    conectsNode.addChildNode(cylinderline)
+                }
+                else {
+                    let radius : CGFloat = 0.2 //
+                    
+                    let geometry0 = SCNCylinder(radius: radius, height: CGFloat(height / 2))
+                    geometry0.radialSegmentCount = 10 //
+                    geometry0.firstMaterial?.diffuse.contents = diffuseColor(type: conect[0].type)
+                    
+                    let geometry1 = SCNCylinder(radius: radius, height: CGFloat(height / 2))
+                    geometry1.radialSegmentCount = 10 //
+                    geometry1.firstMaterial?.diffuse.contents = diffuseColor(type: conect[1].type)
+                    
+                    let cylinderline0 = SCNNode()
+                    cylinderline0.position = v0
+                    let node1 = SCNNode()
+                    node1.position = v1
+                    conectsNode.addChildNode(node1)
+                    
+                    let cylinderline1 = SCNNode()
+                    cylinderline1.position = v1
+                    let node0 = SCNNode()
+                    node0.position = v0
+                    conectsNode.addChildNode(node0)
+                    
+                    let zAlign0 = SCNNode()
+                    zAlign0.eulerAngles.x = Float(M_PI_2)
+                    
+                    let zAlign1 = SCNNode()
+                    zAlign1.eulerAngles.x = Float(M_PI_2)
+                    
+                    let node00 = SCNNode(geometry: geometry0)
+                    node00.position.y = -height / 4
+                    zAlign0.addChildNode(node00)
+                    cylinderline0.addChildNode(zAlign0)
+                    cylinderline0.constraints = [SCNLookAtConstraint(target: node1)]
+                    conectsNode.addChildNode(cylinderline0)
+                    
+                    let node11 = SCNNode(geometry: geometry1)
+                    node11.position.y = -height / 4
+                    zAlign1.addChildNode(node11)
+                    cylinderline1.addChildNode(zAlign1)
+                    cylinderline1.constraints = [SCNLookAtConstraint(target: node0)]
+                    conectsNode.addChildNode(cylinderline1)
+                }
             }
         }
         return conectsNode
