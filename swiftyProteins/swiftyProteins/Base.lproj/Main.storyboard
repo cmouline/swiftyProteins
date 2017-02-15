@@ -153,15 +153,10 @@
                             <constraint firstItem="GAH-NH-djb" firstAttribute="centerY" secondItem="lOA-b7-43u" secondAttribute="centerY" id="ixN-0a-5tK"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Login" id="8re-2O-neu">
-                        <barButtonItem key="rightBarButtonItem" title="Next" id="ifj-33-JwL">
-                            <connections>
-                                <segue destination="W95-P4-Exg" kind="show" identifier="showLigandsList" id="q2A-qI-f8m"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Login" id="8re-2O-neu"/>
                     <connections>
                         <outlet property="touchIDButtonOutlet" destination="GAH-NH-djb" id="OhN-A0-3kf"/>
+                        <segue destination="W95-P4-Exg" kind="show" identifier="showLigandsList" id="B9n-Eo-i99"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gCw-gE-AqH" userLabel="First Responder" sceneMemberID="firstResponder"/>
