@@ -150,13 +150,15 @@ class Scene: SCNScene {
                     continue
                 }
 
-                let v0 : SCNVector3 = SCNVector3Make(conect[0].x, conect[0].y, conect[0].z)
-                let v1 : SCNVector3 = SCNVector3Make(conect[1].x, conect[1].y, conect[1].z)
+                var v0 : SCNVector3 = SCNVector3Make(conect[0].x, conect[0].y, conect[0].z)
+                var v1 : SCNVector3 = SCNVector3Make(conect[1].x, conect[1].y, conect[1].z)
                 let height = v0.distance(receiver: v1)
                 
                 if sceneType == "modern" {
                     let radius : CGFloat = 0.01 //
-                    
+                    if conect[0].x == conect[1].x && conect[0].y == conect[1].y && conect[0].z < conect[1].z {
+                        swap(&v0, &v1)
+                    }
                     let geometry = SCNCylinder(radius: radius, height: CGFloat(height))
                     geometry.firstMaterial?.diffuse.contents = UIColor.black //
                     
@@ -180,12 +182,20 @@ class Scene: SCNScene {
                 else {
                     let radius : CGFloat = 0.2 //
                     
-                    let geometry0 = SCNCylinder(radius: radius, height: CGFloat(height / 2))
-                    geometry0.firstMaterial?.diffuse.contents = diffuseColor(type: conect[0].type)
+                    let geometry0 : SCNGeometry = SCNCylinder(radius: radius, height: CGFloat(height / 2))
+                    let geometry1 : SCNGeometry = SCNCylinder(radius: radius, height: CGFloat(height / 2))
                     
-                    let geometry1 = SCNCylinder(radius: radius, height: CGFloat(height / 2))
-                    geometry1.firstMaterial?.diffuse.contents = diffuseColor(type: conect[1].type)
-                    
+                    // VOIR si un SCNTransformConstraint aurait pu gerer le pb...
+                    if conect[0].x == conect[1].x && conect[0].y == conect[1].y && conect[0].z < conect[1].z {
+                            swap(&v0, &v1) //le pb sera donc toujours sur 1
+                            geometry0.firstMaterial?.diffuse.contents = diffuseColor(type: conect[1].type)
+                            geometry1.firstMaterial?.diffuse.contents = diffuseColor(type: conect[0].type)
+                    }
+                    else {
+                            geometry0.firstMaterial?.diffuse.contents = diffuseColor(type: conect[0].type)
+                            geometry1.firstMaterial?.diffuse.contents = diffuseColor(type: conect[1].type)
+                    }
+
                     let cylinderline0 = SCNNode()
                     cylinderline0.position = v0
                     let node1 = SCNNode()
@@ -193,9 +203,16 @@ class Scene: SCNScene {
                     conectsNode.addChildNode(node1)
                     
                     let cylinderline1 = SCNNode()
-                    cylinderline1.position = v1
                     let node0 = SCNNode()
-                    node0.position = v0
+                    if conect[0].x == conect[1].x && conect[0].y == conect[1].y {
+                        cylinderline1.position = SCNVector3Make(conect[0].x, conect[0].y, (conect[0].z + conect[1].z) / 2)
+                        node0.position = v1
+                    }
+                    else {
+                        cylinderline1.position = v1
+                        node0.position = v0
+
+                    }
                     conectsNode.addChildNode(node0)
                     
                     let zAlign0 = SCNNode()
