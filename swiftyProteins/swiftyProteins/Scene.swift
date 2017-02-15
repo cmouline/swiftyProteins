@@ -26,7 +26,6 @@ class Scene: SCNScene {
         self.hydrogens = hydrogens
         super.init()
         setupCamera()
-//        setupLights()
         self.rootNode.addChildNode(allAtoms())
         self.rootNode.addChildNode(allConects())
     }
@@ -40,21 +39,6 @@ class Scene: SCNScene {
         cameraNode.camera = SCNCamera()
         cameraNode.position = SCNVector3(x: 0, y: 0, z: 30)
         self.rootNode.addChildNode(cameraNode)
-    }
-    
-    func setupLights() {
-        let ambientLightNode = SCNNode()
-        ambientLightNode.light = SCNLight()
-        ambientLightNode.light!.type = SCNLight.LightType.ambient
-        ambientLightNode.light!.color = UIColor(white: 0.67, alpha: 1.0)
-        self.rootNode.addChildNode(ambientLightNode)
-        
-        let omniLightNode = SCNNode()
-        omniLightNode.light = SCNLight()
-        omniLightNode.light!.type = SCNLight.LightType.omni
-        omniLightNode.light!.color = UIColor(white: 0.75, alpha: 1.0)
-        omniLightNode.position = SCNVector3Make(0, 50, 50)
-        self.rootNode.addChildNode(omniLightNode)
     }
     
     func diffuseColor(type : String) -> UIColor {
@@ -185,7 +169,6 @@ class Scene: SCNScene {
                     let geometry0 : SCNGeometry = SCNCylinder(radius: radius, height: CGFloat(height / 2))
                     let geometry1 : SCNGeometry = SCNCylinder(radius: radius, height: CGFloat(height / 2))
                     
-                    // VOIR si un SCNTransformConstraint aurait pu gerer le pb...
                     if conect[0].x == conect[1].x && conect[0].y == conect[1].y && conect[0].z < conect[1].z {
                             swap(&v0, &v1) //le pb sera donc toujours sur 1
                             geometry0.firstMaterial?.diffuse.contents = diffuseColor(type: conect[1].type)
