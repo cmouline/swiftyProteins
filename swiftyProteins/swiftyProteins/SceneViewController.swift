@@ -193,11 +193,13 @@ class SceneViewController: UIViewController {
     
     @IBAction func shareAction(_ sender: UIBarButtonItem) {
 
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         let renderer = UIGraphicsImageRenderer(size: sceneView.bounds.size)
         let image = renderer.image { ctx in
-            sceneView.drawHierarchy(in: sceneView.bounds, afterScreenUpdates: true)
+            sceneView.drawHierarchy(in: sceneView.bounds, afterScreenUpdates: false)
         }
-
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        
         let activityViewController : UIActivityViewController = UIActivityViewController(
             activityItems: [image], applicationActivities: nil)
 
