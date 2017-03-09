@@ -14,6 +14,8 @@ class ProteinListViewController: UITableViewController, UISearchResultsUpdating 
     var filteredProteinList: [String] = []
     let searchController = UISearchController(searchResultsController: nil)
     var selectedLigand : String?
+    var conectArray : [[(x: Float, y: Float, z: Float, type: String)]] = []
+    var atomArray : [(x: Float, y: Float, z: Float, type: String)] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +33,84 @@ class ProteinListViewController: UITableViewController, UISearchResultsUpdating 
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
         searchController.searchBar.autocapitalizationType = UITextAutocapitalizationType.allCharacters
+    }
+    
+    func createPairs(conect: [Int]) {
+        let atomArrayCount = atomArray.count
+        
+        for i in 1..<(conect.count) {
+            if conect[0] < atomArrayCount && conect[i]  < atomArrayCount {
+                conectArray.append([atomArray[conect[0]], atomArray[conect[i]]])
+            }
+        }
+        
+    }
+    
+    func fillConectArray(elem: [String]) {
+        
+        var elem = elem
+        var conect: [Int] = []
+        elem.remove(at: 0)
+        
+        for conectList in elem {
+            
+            let conectInt = Int(conectList)
+            let indexExists = conect.indices.contains(0)
+            
+            if !indexExists || conectInt! > conect[0] {
+                conect.append(conectInt! - 1)
+            }
+            
+        }
+        
+        if conect.count > 1 {
+            createPairs(conect: conect)
+        }
+        
+    }
+    
+    func parseHTML() {
+        
+        let myURLString = "https://files.rcsb.org/ligands/view/\(selectedLigand!)_ideal.pdb"
+        
+        guard let myURL = URL(string: myURLString) else {
+            print("Error: \(myURLString) doesn't seem to be a valid URL")
+            return
+        }
+        
+        conectArray = []
+        atomArray = []
+        
+        do {
+            let myHTMLString = try String(contentsOf: myURL, encoding: .ascii)
+            let htmlContent = myHTMLString.characters.split(separator: "\n").map(String.init)
+            
+            for line in htmlContent {
+                
+                var elem = line.characters.split(separator: " ").map(String.init)
+                
+                if elem[0] == "ATOM" {
+                    
+                    atomArray.append(((elem[6] as NSString).floatValue, (elem[7] as NSString).floatValue, (elem[8] as NSString).floatValue, elem[11]))
+                    
+                } else if elem[0] == "CONECT" {
+                    
+                    fillConectArray(elem: elem)
+                    
+                }
+                
+            }
+            
+        } catch let error {
+            print("Error: \(error)")
+            let ac = UIAlertController(title: "Error", message: "Something wrong happened with this ligand", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            ac.view.tintColor = UIColor.red // change text color of the buttons
+            ac.view.backgroundColor = UIColor.red  // change background color
+            ac.view.layer.cornerRadius = 25   // change corner radius
+            present(ac, animated: true)
+        }
+        
     }
     
     func getProteinList() {
@@ -111,51 +191,29 @@ class ProteinListViewController: UITableViewController, UISearchResultsUpdating 
         print("selected Ligand : \(self.selectedLigand ?? "nil")")
         if self.selectedLigand != nil {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
-            performSegue(withIdentifier: "toScene", sender: self)
+            parseHTML()
+            if !atomArray.isEmpty {
+                performSegue(withIdentifier: "toScene", sender: self)
+            } else {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                let ac = UIAlertController(title: "Error", message: "Ligand file is empty", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default))
+                ac.view.tintColor = UIColor.red // change text color of the buttons
+                ac.view.backgroundColor = UIColor.red  // change background color
+                ac.view.layer.cornerRadius = 25   // change corner radius
+                present(ac, animated: true)
+            }
         }
     }
-    
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
     
     // MARK: - Navigation
 
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
          if segue.identifier == "toScene" {
              if let vc = segue.destination as? SceneViewController {
-                 vc.ligand = self.selectedLigand!
+                vc.ligand = self.selectedLigand!
+                vc.atomArray = self.atomArray
+                vc.conectArray = self.conectArray
              }
          }
      }

@@ -6,7 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -23,10 +23,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lauchscreen" translatesAutoresizingMaskIntoConstraints="NO" id="BhO-4o-an0">
-                                <rect key="frame" x="67" y="207" width="240" height="252"/>
+                                <rect key="frame" x="37" y="183" width="300" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="BhO-4o-an0" secondAttribute="height" multiplier="1:1" id="KJR-fk-pdq"/>
+                                    <constraint firstAttribute="width" constant="300" id="tPO-h1-HjE"/>
+                                </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swifty Proteins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j8r-cj-CUo">
-                                <rect key="frame" x="0.0" y="170" width="375" height="30"/>
+                                <rect key="frame" x="0.0" y="145" width="375" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -34,13 +38,11 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="BhO-4o-an0" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="51" id="0dh-BZ-CLb"/>
-                            <constraint firstItem="j8r-cj-CUo" firstAttribute="centerX" secondItem="BhO-4o-an0" secondAttribute="centerX" id="DE6-gk-my0"/>
+                            <constraint firstItem="BhO-4o-an0" firstAttribute="top" secondItem="j8r-cj-CUo" secondAttribute="bottom" constant="8" symbolic="YES" id="41K-d0-eRz"/>
                             <constraint firstItem="j8r-cj-CUo" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="Uej-eH-6za"/>
                             <constraint firstItem="BhO-4o-an0" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="dJJ-ls-2Rn"/>
                             <constraint firstItem="BhO-4o-an0" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="mwD-xy-4Z0"/>
-                            <constraint firstItem="BhO-4o-an0" firstAttribute="top" secondItem="j8r-cj-CUo" secondAttribute="bottom" constant="7" id="sZe-v6-ux3"/>
-                            <constraint firstItem="BhO-4o-an0" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="187" id="yv4-d4-veK"/>
+                            <constraint firstItem="j8r-cj-CUo" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="ua7-VB-GNV"/>
                         </constraints>
                     </view>
                 </viewController>
