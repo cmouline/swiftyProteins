@@ -19,12 +19,6 @@ class ProteinListViewController: UITableViewController, UISearchResultsUpdating 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         getProteinList()
         
@@ -33,6 +27,11 @@ class ProteinListViewController: UITableViewController, UISearchResultsUpdating 
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
         searchController.searchBar.autocapitalizationType = UITextAutocapitalizationType.allCharacters
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        searchController.searchBar.becomeFirstResponder()
     }
     
     func createPairs(conect: [Int]) {
@@ -151,16 +150,8 @@ class ProteinListViewController: UITableViewController, UISearchResultsUpdating 
     }
 
     // MARK: - Table view data source
-
-    /*
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-    */
  
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         if searchController.isActive && searchController.searchBar.text != "" {
             return filteredProteinList.count
         }

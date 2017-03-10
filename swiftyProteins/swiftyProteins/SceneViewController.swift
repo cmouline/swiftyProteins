@@ -45,7 +45,6 @@ class SceneViewController: UIViewController {
         let task = URLSession.shared.dataTask(with: request as URLRequest) {
             (data, response, error) in
             if let err = error {
-                print("error1")
                 print(err)
             } else if let d = data {
                 

@@ -170,7 +170,7 @@ class Scene: SCNScene {
                     let geometry1 : SCNGeometry = SCNCylinder(radius: radius, height: CGFloat(height / 2))
                     
                     if conect[0].x == conect[1].x && conect[0].y == conect[1].y && conect[0].z < conect[1].z {
-                            swap(&v0, &v1) //le pb sera donc toujours sur 1
+                            swap(&v0, &v1) //le probleme sera donc toujours sur 1
                             geometry0.firstMaterial?.diffuse.contents = diffuseColor(type: conect[1].type)
                             geometry1.firstMaterial?.diffuse.contents = diffuseColor(type: conect[0].type)
                     }

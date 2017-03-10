@@ -18,8 +18,6 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) { // is TouchID available on the device ? Yes :
             
         } else { // is TouchID available on the device ? No :
@@ -31,11 +29,6 @@ class LoginViewController: UIViewController {
             ac.view.layer.cornerRadius = 25   // change corner radius
             present(ac, animated: true)
         }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func touchIDButton(_ sender: Any) {
@@ -104,15 +97,5 @@ class LoginViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
