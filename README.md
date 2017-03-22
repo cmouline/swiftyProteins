@@ -1,6 +1,3 @@
-# proteins
-Ecole 42 project Swifty Proteins
-
 <snippet>
   <content><![CDATA[
 # ${1:Project Name}
